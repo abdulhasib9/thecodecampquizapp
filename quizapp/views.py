@@ -67,7 +67,7 @@ def start_quiz(request, quiz_id, question_index=1):
 def dashboard(request):
     exams = Exam.objects.all()
     quizzes = Quiz.objects.all()
-    
+    questions = Question.objects.count()
     quiz_data = []
     for quiz in quizzes:
         quiz_data.append({
@@ -80,6 +80,7 @@ def dashboard(request):
     context = {
         'exams': exams,
         'quizzes': quizzes,
-        'quizzes_json': json.dumps(quiz_data)
+        'quizzes_json': json.dumps(quiz_data),
+        'questions': questions
     }
     return render(request, 'dashboard.html', context)
